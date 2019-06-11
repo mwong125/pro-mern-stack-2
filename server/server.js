@@ -1,4 +1,13 @@
 
+const typeDefs = `
+type Query {
+    about: String!
+}
+type Mutation {
+    setAboutMessage(message: String!): String
+}
+`;
+
 const express = require('express');
 const app = express();
 
