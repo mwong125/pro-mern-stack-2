@@ -46,7 +46,7 @@ function _graphQLFetch() {
             variables = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : {};
             _context3.prev = 1;
             _context3.next = 4;
-            return fetch('/graphql', {
+            return fetch(window.ENV.UI_API_ENDPOINT, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ function _graphQLFetch() {
           case 13:
             _context3.prev = 13;
             _context3.t0 = _context3["catch"](1);
-            alert("Error in sending daat to server: ".concat(_context3.t0.message));
+            alert("Error in sending data to server: ".concat(_context3.t0.message));
 
           case 16:
           case "end":
