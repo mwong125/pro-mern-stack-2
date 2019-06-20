@@ -3,6 +3,9 @@
  *    mongo issuetracker scripts/init.mongo.js
  */
 
+/* global db print */
+/* eslint no-restricted-globals: "off" */
+
 db.issues.remove({});
 
 const issuesDB = [
@@ -14,6 +17,12 @@ const issuesDB = [
     created: new Date('2019-01-15'),
     due: undefined,
     title: 'Error in sonsole when clicking Add',
+    description: 'Steps to recreate the problem:'
+       + '\n1. Refresh the browser/'
+       + '\n2. Select "New" in the filter'
+       + '\n3. Refresh the browser again. Note the warning in the console'
+       + '\n4. Click on Add.'
+       + 'There is an error in console, and add doesnt work.',
   },
   {
     id: 2,
@@ -23,6 +32,8 @@ const issuesDB = [
     created: new Date('2019-01-16'),
     due: new Date('2019-02-01'),
     title: 'Missing bottom border on panel',
+    description: 'There needs to be a border in the bottom in the panel'
+       + 'that appears when clicking on Add',
   },
 ];
 

@@ -6,10 +6,10 @@ const url = process.env.DB_URL || 'mongodb://localhost/issuetracker';
 function testWithCallbacks(callback) {
   console.log('\n--- testWithCallbacks ---');
   const client = new MongoClient(url, { useNewUrlParser: true });
-  client.connect((err, client) => {
-    if (err) {
-	    callback(err);
-	    return;
+  client.connect((conErr) => {
+    if (conErr) {
+      callback(conErr);
+      return;
     }
     console.log('Connected to MongoDB URL', url);
 
@@ -17,23 +17,23 @@ function testWithCallbacks(callback) {
     const collection = db.collection('employees');
 
     const employee = { id: 1, name: 'A. Callback', age: 23 };
-    collection.insertOne(employee, (err, result) => {
-	    if (err) {
+    collection.insertOne(employee, (insertErr, result) => {
+      if (insertErr) {
         client.close();
-        callback(err);
+        callback(insertErr);
         return;
-	    }
-	    console.log('Result of insert:\n', result.insertedId);
-	    collection.find({ _id: result.insertedId }).toArray((err, docs) => {
-        if (err) {
-		    client.close();
-		    callback(err);
-		    return;
+      }
+      console.log('Result of insert:\n', result.insertedId);
+      collection.find({ _id: result.insertedId }).toArray((findErr, docs) => {
+        if (findErr) {
+          client.close();
+          callback(findErr);
+          return;
         }
-        console.log('Result of find:\n', docs);
+        console.log('Result of find :\n', docs);
         client.close();
-        callback(err);
-	    });
+        callback();
+      });
     });
   });
 }
