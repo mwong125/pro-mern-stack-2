@@ -15,6 +15,7 @@
 			"dependencies": {
 						"babel-loader": "^8.0.6",
 						"babel-polyfill": "^6.26.0",
+						"bootstrap": "^3.4.1",
 						"dotenv": "^8.0.0",
 						"eslint-plugin-jsx-a11y": "^6.2.1",
 						"eslint-plugin-react": "^7.13.0",
@@ -23,7 +24,9 @@
 						"nodemon": "^1.19.1",
 						"prop-types": "^15.7.2",
 						"react": "^16.8.6",
+						"react-bootstrap": "^0.32.4",
 						"react-dom": "^16.8.6",
+						"react-router-bootstrap": "^0.25.0",
 						"react-router-dom": "^5.0.1",
 						"url-search-params": "^1.1.0",
 						"whatwg-fetch": "^3.0.0"

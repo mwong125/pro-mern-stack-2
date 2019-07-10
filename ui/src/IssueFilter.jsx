@@ -2,6 +2,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import URLSearchParams from 'url-search-params';
+import {
+  ButtonToolbar, Button, FormGroup, FormControl, ControlLabel, InputGroup,
+  Row, Col,
+} from 'react-bootstrap';
 
 class IssueFilter extends React.Component {
   constructor({ location: { search } }) {
@@ -31,19 +35,25 @@ class IssueFilter extends React.Component {
   onChangeEffortMin(e) {
     const effortString = e.target.value;
     if (effortString.match(/^\d*$/)) {
-      this.setState({ effortMin: e.target.value, changed: true });
+      this.setState({
+        effortMin: e.target.value, changed: true,
+      });
     }
   }
 
   onChangeEffortMax(e) {
     const effortString = e.target.value;
     if (effortString.match(/^\d*$/)) {
-      this.setState({ effortMax: e.target.value, changed: true });
+      this.setState({
+        effortMax: e.target.value, changed: true,
+      });
     }
   }
 
   onChangeStatus(e) {
-    this.setState({ status: e.target.value, changed: true });
+    this.setState({
+      status: e.target.value, changed: true,
+    });
   }
 
   showOriginalFilter() {
@@ -51,8 +61,9 @@ class IssueFilter extends React.Component {
     const params = new URLSearchParams(search);
     this.setState({
       status: params.get('status') || '',
-      effortMin: params.get('effortMin'),
-      effortMax: params.get('effortMax'),
+      effortMin: params.get('effortMin') || '',
+      effortMax: params.get('effortMax') || '',
+      changed: false,
     });
   }
 
@@ -77,41 +88,51 @@ class IssueFilter extends React.Component {
       changed,
     } = this.state;
     return (
-      <div>
-        Status:
-        {' '}
-        <select value={status} onChange={this.onChangeStatus}>
-          <option value="">(All)</option>
-          <option value="New">New</option>
-          <option value="Assigned">Assigned</option>
-          <option value="Fixed">Fixed</option>
-          <option value="Closed">Closed</option>
-        </select>
-        {' '}
-        Effort between:
-        {' '}
-        <input
-          size={5}
-          value={effortMin}
-          onChange={this.onChangeEffortMin}
-        />
-        {' - '}
-        <input
-          size={5}
-          value={effortMax}
-          onChange={this.onChangeEffortMax}
-        />
-        {' '}
-        <button type="button" onClick={this.applyFilter}>Apply</button>
-        {' '}
-        <button
-          type="button"
-          onClick={this.showOriginalFilter}
-          disabled={!changed}
-        >
-         Reset
-        </button>
-      </div>
+      <Row>
+        <Col xs={6} sm={4} md={3} lg={2}>
+          <FormGroup>
+            <ControlLabel>Status:</ControlLabel>
+            <FormControl
+              componentClass="select"
+              value={status}
+              onChange={this.onChangeStatus}
+            >
+              <option value="">(All)</option>
+              <option value="New">New</option>
+              <option value="Assigned">Assigned</option>
+              <option value="Fixed">Fixed</option>
+              <option value="Closed">Closed</option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+        <Col xs={6} sm={4} md={3} lg={2}>
+          <FormGroup>
+            <ControlLabel>Effort between:</ControlLabel>
+            <InputGroup>
+              <FormControl value={effortMin} onChange={this.onChangeEffortMin} />
+              <InputGroup.Addon>-</InputGroup.Addon>
+              <FormControl value={effortMax} onChange={this.onChangeEffortMax} />
+            </InputGroup>
+          </FormGroup>
+        </Col>
+        <Col xs={6} sm={4} md={3} lg={2}>
+          <FormGroup>
+            <ControlLabel>&nbsp;</ControlLabel>
+            <ButtonToolbar>
+              <Button bsStyle="primary" type="button" onClick={this.applyFilter}>
+                Apply
+              </Button>
+              <Button
+                type="button"
+                onClick={this.showOriginalFilter}
+                disabled={!changed}
+              >
+                Reset
+              </Button>
+            </ButtonToolbar>
+          </FormGroup>
+        </Col>
+      </Row>
     );
   }
 }

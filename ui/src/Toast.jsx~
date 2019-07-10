@@ -1,0 +1,18 @@
+
+import React from 'react';
+import { Alert, Collapse } from 'react-bootstrap';
+
+export default class Toast extends React.Component {
+  render() {
+    const {
+      showing, bsStyle, onDismiss, children,
+    } = this.props;
+    return (
+      <div style={{ position: 'fixed', bottom: 20, left: 20 }}>
+        <Alert bsStyle={bsStyle} onDismiss={onDismiss}>
+          {children}
+        </Alert>
+      </div>
+    );
+  }
+}
